@@ -1,0 +1,10 @@
+.idea/
+.project
+.pydevproject
+test-results/
+tmp/
+temp/
+routes/
+*.pyc
+conf/config.json
+fgx-static
