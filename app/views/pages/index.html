@@ -4,14 +4,16 @@
 {{template "header.html" .}}
 <div class="container">
 
+    <p>Last Update: 15-Oct-2013 (<a href="http://en.wikipedia.org/wiki/Aeronautical_Information_Publication#Overview" target="_blank">AIP / AIRAC</a> 2013.10) - <a href="http://data.x-plane.com/get_data.html" target="_blank">AptNav201310XP1000.zip</a></p>
 
-      <!-- Jumbotron -->
+    <!-- Jumbotron -->
       <div class="jumbotron">
-        <h1>NavDb for FlightGear</h1>
+        <h1>Navigation Data for FlightGear</h1>
 
-        <p>This NavDb project takes the latest xplane data, imports it to a postgis database spatially ready for querying on demand. It is intended
-        as a "permanent" feed moving foward and making the latest xplane data available and updated for all, whether for caching local or online live. The data returned
-        is formatted in various formats and in a pratical way with a lot of the calculations already done, such as the middle of an airport, runway center point, orientation and displaced threshold etc. 
+        <p>This project takes the latest <a href="http://data.x-plane.com/" target="_xplane">xplane data</a>, imports it to a postgis spatial database ready for querying on demand. It is intended
+        as a "permanent" feed moving foward and making the latest data available and updated regular. The data returned
+        is formatted in various formats and in a practical way with a lot of the calculations already done, such as the middle of an airport, runway center point, orientation and displaced threshold etc.
+        Ideal for mashups, et all invited.
         </p>
       </div>
 
@@ -19,34 +21,25 @@
       <div class="row">
       
         <div class="col-lg-4">
-          <h2>JSON API</h2>
-          <p>The JSON api for your mash up applicatioon, mobile, pyqt et all.. mix it in..</p>
-          <p><a class="btn btn-primary" href="/json-api" role="button">JSON &raquo;</a></p>
+            <h2>JSON API</h2>
+            <p>Query data using the json api, this is getting reasonably stable as an API.</p>
+            <p><a class="btn btn-primary" href="/json-api" role="button">JSON &raquo;</a></p>
         </div>
-		<h2>JSON API</h2>
-          <p>The json api is what we expect to be the next gen of data..</p>
-          <p><a class="btn btn-primary" href="#" role="button">JSON &raquo;</a></p>
-          
         <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            <h2>XML API</h2>
+            <p>This is experimental and more coming soon, once its decided what the api is</p>
+            <p><a class="btn btn-primary" href="/xml-api" role="button">JSON &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+            <h2>KML API</h2>
+            <p>Use google earch or marble map</p>
+            <p><a class="btn btn-primary" href="/kml-api" role="button">View details &raquo;</a></p>
         </div>
       </div>
       
       
-    <div class="top_bit">
-        <h1><a href="http://en.wikipedia.org/wiki/Air_navigation" target="_blank">Navigation Data</a> for <a href="http://wiki.flightgear.org" target="_blank">FlightGear</a></h1>
-        <p>Last Update: 15-Oct-2013 (<a href="http://en.wikipedia.org/wiki/Aeronautical_Information_Publication#Overview" target="_blank">AIP / AIRAC</a> 2013.10) - <a href="http://data.x-plane.com/get_data.html" target="_blank">AptNav201310XP1000.zip</a></p>
-        
-        <p>This <b>NavData project</b> takes the latest xplane data, imports it to a postgis database spatially ready for querying on demand. It is intended
-        as a "permanent" feed moving foward and making the latest xplane data available and updated for all, whether for caching local or online live. The data returned
-        is formatted in a pratical way with a lot of the calculations already done, such as the middle of an airport, runway center point, orientation and displaced threshold etc. 
-        Also measures are returned in different units such as evelation both in metres and feet to make life easier for both calculation and presentation for end user application.
-        </p>
-    </div>
 
-    <p><i>This project is new and needs some love as its got a postgis database backend, lacks golang developers, and specifically revel developers to advice wanted </i></p>
+    <p><i>This project is new and needs some love, lacks golang developers, and specifically revel developers to advice wanted </i></p>
 
     </div>
 {{template "footer.html" .}}
