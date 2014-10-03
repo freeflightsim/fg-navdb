@@ -1,0 +1,33 @@
+{{set . "page" "controlpanel"}}
+{{set . "title" "Control Panel"}}
+
+{{template "header.html" .}}
+
+
+<div id="controlpanel_widget" style="border: 0 auto;"></div>
+<script>
+
+ Ext.Loader.setConfig({
+        enabled : true,
+        paths   : {
+        	Ext: "/fgx-static/js/ext-4.2.1-gpl",
+			//GeoExt: "/public/js/fgx-static/js/GeoExt-2.0/src/GeoExt",
+			 GeoExt: "/fgx-static/js/geoext2-2.0.1/src/GeoExt",
+			//FGx: '/fgx_ext/0.1'
+            NavDb : '/public/js/navdb'
+        } 
+});
+
+
+Ext.onReady(function(){
+	Ext.Msg.wait("Loading, caching and initializing map");
+	VP = Ext.create("NavDb.ControlPanelWidget", {});
+	VP.initialize();
+	Ext.Msg.hide();
+});
+</script>
+	
+
+
+
+{{template "footer.html" .}}

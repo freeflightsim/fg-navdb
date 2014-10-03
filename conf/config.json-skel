@@ -1,0 +1,20 @@
+{
+    "debug": 0,
+	"db_live": {
+		"server": "localhost",
+		"user": "fgxx",
+		"password": "secret-tiemeup-tie-me-down-remembered",
+		"database": "fgxmap-cant-remeber"
+	},
+	"db_staging": {
+		"server": "localhost",
+		"user": "fgxx",
+		"password": "foobar",
+		"database": "fgxmap"
+	},
+	"www_server": "localhost",
+	"www_port": "7889",
+	"secret": "kire999",
+	
+	"stash_dir": "/home/fgxx/navdb_workspace"
+}

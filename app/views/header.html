@@ -1,0 +1,160 @@
+{{set . "static_server" "/fgx-static"}}
+{{set . "ext_ver" "ext-4.2.1-gpl"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{.title}} | FlightGear NavDb</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+	<link rel="icon"  type="image/x-icon" href="/favicon.ico" /> 
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+
+	<script type="text/javascript" src="{{.static_server}}/js/{{.ext_ver}}/ext-all.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/css/icons.css" />
+
+	<link rel="stylesheet" type="text/css" href="{{.static_server}}/js/{{.ext_ver}}/resources/css/ext-all.css" />
+
+	
+	
+	<script src="{{.static_server}}/js/OpenLayers-2.12/OpenLayers.js"></script>
+
+	<script src="{{.static_server}}/js/proj4js-1.1.0/lib/proj4js-combined.js"></script>
+
+	<script src="{{.static_server}}/js/osm/OpenStreetMap.js"></script>
+
+	
+	
+	<script type="text/javascript" src="/public/js/navdb/main.js"></script>
+	<script type="text/javascript" src="/public/js/navdb/layers.js"></script>
+	
+
+    <link href='http://fonts.googleapis.com/css?family=Michroma' rel='stylesheet' type='text/css'>
+
+	
+<style>
+   
+        .navbar-brand{
+        	background-position: 0 10px;
+            background-image: url(/public/img/flightgear_logo_small.png);
+            background-repeat: no-repeat;
+            font-family: 'Michroma', sans-serif;
+            color: #444444;
+            font-weight: bold;
+            font-size: 20pt;
+            padding-left: 40px;
+        }
+        
+.top_bit h1{
+    font-size: 14pt;
+    color: #666666;
+}
+        
+h2 {
+    margin-top: 40px;
+    padding: 5px;
+    font-size: 20pt;
+    deadbackground-color: #cccccc !important;
+    border-bottom: 1px solid #aaaaaa;
+    font-family: 'Michroma', sans-serif;
+}
+
+h3 {
+    margin-top: 40px;
+    padding: 5px 0;
+    font-size: 18pt;
+    background-color: #dddddd !important;
+    border-top: 1px solid #aaaaaa;
+    border-bottom: 1px solid #aaaaaa;
+    color: #444444;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+     font-family: 'Michroma', sans-serif;
+}
+
+h4 {
+    margin-top: 30px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #dddddd;
+}
+
+h5 {
+    font-weight: bold !important;
+    font-size: 10pt;
+    margin-top: 30px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.service_block{
+    
+}
+.service_block h4{
+    font-family: monospace;
+    color: green;
+}
+</style>
+</head>
+
+<body>
+	
+        
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">NavDb</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				<li {{if eq .page "home"}}class="active"{{end}}><a href="/">Home</a></li>
+				<li {{if eq .page "widget"}}class="active"{{end}}><a href="/widget">Db.Widget</a></li>
+				<li {{if eq .page "json-api"}}class="active"{{end}}><a href="/json-api">JSON API</a></li>
+				<li {{if eq .page "kml-api"}}class="active"{{end}}><a href="/kml-api">KML API</a></li>
+				<li {{if eq .page "xml-api"}}class="active"{{end}}><a href="/xml-api">XML API</a></li>
+				<li {{if eq .page "controlpanel"}}class="active"{{end}}><a href="/controlpanel">Control Panel</a></li>
+				<li {{if eq .page "dev"}}class="active"{{end}}><a href="/controlpanel">Developer</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">FlightGear <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+				<li><a href="/docs/index.html">Docs</a></li>
+               <li><a href="https://github.com/fgx/fg-navdb/issues">Issues</a></li>
+             <li><a href="http://wiki.flightgear.org" target="_blank">FlightGear</a></li>
+
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">Default</a></li>
+            <li class="active"><a href="./">Static top</a></li>
+            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    
+

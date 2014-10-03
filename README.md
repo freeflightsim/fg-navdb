@@ -11,10 +11,11 @@ The project has two core parts
 
 Requirements:
 -------------------
-- A linux server with root/sudo access and gcc (dev platform is kubuntu/debian)
+- A linux server with root/sudo access and gcc
 - Postgres 9 + Postgis2 database
-- golang 1.3 - for development
 - python 2.6+ - for importing
+- golang 1.3 - for development
+- revel app framwork -  github.com/revel/revel
 
 
 Run:

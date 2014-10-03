@@ -1,0 +1,203 @@
+{{set . "page" "json-api"}}
+{{set . "title" "JSON API"}}
+
+{{template "header.html" .}}
+<div class="container">
+ <h2>JSON API</h2>
+    
+    <p><b>Examples</b>:
+        <ul>
+            <li>Airports with <a href="/json/airports?human=1&ident=sfo">idents containig <b>sfo</b></a> or <a href="/airports?human=1&search=eat ha k">name/ident containing both "eat ha k"</a></li>
+            <li><a href="/json/airport/KSFO?human=1&">KSFO San Fransisco Airport</a></li>
+            <li><a href="/json/navaids?human=1&ident=bcn">Navaids containig "bcn"</a></li>
+            <li><a href="/json/all?human=1&bbox=-1.2496588914110964,51.139546444911346,1.1673332957524811,52.030944847791034">Data around Heathrow</a></li>
+        </ul>
+    </p>
+ 
+    <h3>Service URL's</h3>
+    <div class="service_block">
+    
+     <a name="airports.all.json"></a>
+    <h4>/json/airports/all</h4> 
+    <p>All 13,000+ (TODO make this no dynamic) ICAO airports by clicking here > <a href="/json/airports/all">might take a phew seconds</a></p>
+
+    
+    <a name="airports.json"></a>
+    <h4>/json/airports.json</h4>
+    <p><a href="#search_vars">Search</a> for airports</p>
+    
+    
+    <a name="airport.json"></a>
+    <h4>/json/airport/&lt;IDENT&gt;</h4>
+    <p>Return data on an airport with the given <b>ident</b> not case sensitive. Data</p>
+    <ul>
+        <li><b class="return">airport</b> - general info</li>
+        <li><b class="return">runways</b> - general info</li>
+        <li><b class="return">thresholds</b> - threshold info</li>
+        <li>The data following is also present, but not from xplane and experimental
+            <ul>
+                <li><b class="return">sids</b> - index of sids</li>
+                <li><b class="return">sid[ident]</b> - details of sid</li>
+                <li><b class="return">star</b> - index of stars</li>
+                <li><b class="return">star[ident]</b> - details of star</li>
+                <li><b class="return">approaches</b> - index of approaches</li>
+                <li><b class="return">approach[ident]</b> - details of approach</li>
+            </ul>
+        </ul>
+     </ul>
+
+    <a name="navaids.json"></a>
+    <h4>/json/navaids</h4>
+    <p><a href="#search_vars">Search</a> for navaids such as dme, ndb, vor</p>
+    
+    
+    <a name="all.json"></a>
+    <h4>/json/all</h4>
+    <p>Returns a <a href="#search_vars">Search</a> for everything. Please don't use this unless you are a map user as its expensive particular with bbox queries</p>
+
+
+    </div>
+
+
+    {#============================================================================#}
+    <h3>Developers Guide</h3>
+    
+    
+    
+    <a name="query_vars"></a> 
+    <h4 class="query">Requests &amp; Queries</h4>
+    
+    <p>Requests are considered to be one of the following types:
+        <ul>
+            <li>An <a href="#an_endpoint">End Point</a> - eg the unique url of an airport or navaid details, no query vars (<a href="/airport/KSFO.json"><code>/airport/KSFO.json</code></a>)</li>
+            <li>A <a href="#search_vars">Search</a> - eg finding airport or navaid  via text or bbox query vars (<a href="/navaids.json?ident=amm"><code>/navaids.json?ident=amm</code></a>)</li>
+        </ul>
+    </p>
+    
+    <a name="an_endpoint"></a> 
+    <h5>End Point</h5>
+    <p>An end point is considered to be the 'url' for some data, eg an airport at <code>/airport/IDENT.json</code>. (NOTE: at present the only endpoint is an airport, others such as navaids have duplicates)
+        <ul>
+            <li>example request: <a href="/airport/ehAm.json"><code>/airport/ehAm.json</code></a></li>
+            <li>The <em>ident</em> part is case insensitve</li>
+            <li>No 404 will be thrown should the item not exist eg <a href="/airport/ZZZZ.json"><code>/airport/ZZZZ.json</code></a></li>
+            <li>Or  invalid codes <a href="/airport/iDoNotExist.json"><code>/airport/iDoNotExist.json</code></a></li>
+            <li>Instead the <a href="#error">error</a> variable in the <a href="#response">returned</a> in json will contain the error message</li>
+        </ul>
+            
+    
+    <a name="search_vars"></a> 
+    <h5>Search</h5>
+    <p>For searches, the following query paramaters are used and are common across all search requests
+        <ul>
+        
+            <li><b>ident=</b>  searches and returns any part of the ident
+                <ul>
+                    <li><a href="/airports.json?ident=sfo"><code>/airports.json?ident=sfo</code></a></li>
+                    <li><a href="/all.json?ident=sfo"><code>/all.json?ident=sfo</code></a></li>
+                    <li>Is not case sensitive</li>
+                </ul>
+               
+            </li>
+            
+            <li><b>search=</b>  searches in the ident and name space seperated
+                <ul>
+                    <li><a href="/airports.json?search=ton lu"><code>/airports.json?search=ton lu</code></a></li>
+                    <li><a href="/navaids.json?search=amma n"><code>/navaids.json?search=amma n</code></a></li>
+                    <li>Is not case sensitive</li>
+                    <li>The query is split into spaces, so the more "bits" the better</li>
+                </ul>
+            </li>
+            
+            <li><b>bbox=left,bottom,right,top</b>  returns records within the bounding box
+                <ul>
+                    <li>eg <a href="/all.json?bbox=-1.249,51.139,1.167,52.030"><code>/all.json?bbox=-1.249,51.139,1.167,52.030</code></a> centered around Heathrow</li>
+                    <li>or described another way, <b>min_lon,min_lat,max_lon,max_lat</b></li>
+                    <li>even <b>west,south,east,north</b></li>
+                    <li>This is inspired by <a href="http://dev.openlayers.org/docs/files/OpenLayers/BaseTypes/Bounds-js.html#OpenLayers.Bounds.Constructor" target="_blank">OSM</a> 
+                                and <a href="https://developers.google.com/kml/documentation/kmlreference#viewformat" target="_blank">KML</a>.
+                    </li>
+                    <li>For use with maps and the "on move" event. Don't blow up the server as this is a query to postgis spatially ;-)</li>
+                </ul>
+                
+            </li>
+
+         <li>The query is executed looking for a valid ident, search or bbox in that order, otherwise its an error.</li>
+        </ul>
+     </p>   
+        
+        
+    <a name="ntype"></a> 
+    
+    
+    <h4>ntypes</h4>
+    <p>As multiple rows of different data types (eg airport, vor, fix) can be requested and returned, the ntype ie 'navigation type' is used, eg:
+    <ul>
+        <li><code>{"ntype": "vor", "lat": 1.23, "lon": 1.22, "ident": "FOO"}</code> - a row with a vor station</li>
+        <li><code>?search=foo&ntype=vor,apt,fix</code> - searching for "foo" in three navigation types</li>
+    </ul>
+    
+    Below is a list of 'ntypes' used, and the feed at <a href="/ntypes.json"><code>/ntypes.json</code></a>
+    </p>
+    <table class="table table-condensed" style="width: 50%; font-size: 10pt; margin-left: 100px;">
+        <thead>
+            <tr><th>ntype</th><th>description</th></tr>
+        </thead>
+        <tbody>
+            
+            <tr><td>vor</td><td>VOR Station</td></tr>
+            <tr><td>dme</td><td>DME Station</td></tr>
+            <tr><td>ndb</td><td>NDB Station</td></tr>
+            <tr><td>fix</td><td>Fix</td></tr>
+            <tr><td>apt</td><td>Airport</td></tr>
+            <tr><td>rwy</td><td>Runway</td></tr>
+            <tr><td>thr</td><td>Threshold</td></tr>
+            <tr><td>ils</td><td>ILS</td></tr>
+            <tr><td>im</td><td>Inner Marker</td></tr>
+            <tr><td>mm</td><td>Middle Marker</td></tr>
+            <tr><td>om</td><td>Outer Marker</td></tr>
+        </tbody>
+    </table>
+
+    
+    
+    <a name="response"></a>
+    <h4 class="return">Response</h4>
+     <p>
+     <ul>
+        <a name="error"></a>
+        <li>All queries are returned with the following headers. Cross Origin is allowed and one of the design goals, avoiding proxies and other techniques
+            <ul>
+                <li><code>Content-Type: application/json</code></li>
+                <li><code>Access-Control-Allow-Origin:*</code></li>
+                <li><code>Access-Control-Allow-Methods:GET, OPTIONS</code></li>
+                <li>Any requests which are not GET or OPTIONS with recieve a <code>405 Method not allowed</code></li>
+            </ul>
+         </li>
+        <li>The json data always contains the keys 
+            <ul>
+                <li><code>airac: "version"</code> - the xplane data set used <a href="http://en.wikipedia.org/wiki/Aeronautical_Information_Publication#Overview">AIRAC</a></li>
+                <li><code>error: 0</code> - Contains an error message or 0. On client its a <code>if(data.error).. </code> check.</li>
+                <li><code>success: true</code> - is only false in event of a system failure, eg database down, but normally returns true</li>
+                <li><code>_ts: "yyyy-mm-dd hh:mm:ss"</code> - the utc/zulu date the request was started server side</li>
+                <li><code>_api: "0.1-alpha"</code> - the json api version. NOTE: this is under active development towards v1.0</li>
+                <li><code>rows: [data]</code> - Most requests return navdata in the 'rows' variable except eg airport</li> 
+            </ul>
+        </li>
+        <li>Most rows contain similar values, sometimes present or not such as
+           <ul>
+                <li><b class="return">ntype</b> - the "navdata type", more below</li>
+                <li><b class="return">ident</b> - The ident/code and uses for airport, navaid, fix, runway etc</li>
+                <li><b class="return">lat / lon</b> - decimal degrees</li>
+                <li><b class="return">elev_m / elev_ft</b> - elevation in metres and feet</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    
+ </div>
+
+
+
+
+{{template "footer.html" .}}

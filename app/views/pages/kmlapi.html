@@ -1,0 +1,23 @@
+{{set . "page" "kml-api"}}
+{{set . "title" "KML API"}}
+
+{{template "header.html" .}}
+
+<div class="container">
+ <h2>KML API and Google Earth</h2>
+    
+    <p><b>Examples</b>:
+        <ul>
+            <li>Airports with <a href="/json/airports?human=1&ident=sfo">idents containig <b>sfo</b></a> or <a href="/airports?human=1&search=eat ha k">name/ident containing both "eat ha k"</a></li>
+            <li><a href="/json/airport/KSFO?human=1&">KSFO San Fransisco Airport</a></li>
+            <li><a href="/json/navaids?human=1&ident=bcn">Navaids containig "bcn"</a></li>
+            <li><a href="/json/all?human=1&bbox=-1.2496588914110964,51.139546444911346,1.1673332957524811,52.030944847791034">Data around Heathrow</a></li>
+        </ul>
+    </p>
+ 
+ </div>
+
+
+
+
+{{template "footer.html" .}}

@@ -1,0 +1,81 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+## Modules -----------------------
+
+module:testrunner
+module:jobs
+
+
+## Static -----------------------
+
+GET     /favicon.ico						Static.Serve("public", "favicon.ico")
+GET     /favicon.png						Static.Serve("public", "favicon.png")
+GET     /robots.txt							Static.Serve("public", "robots.txt")
+GET     /public/*filepath					Static.Serve("public")
+GET     /fgx-static/*filepath				Static.Serve("fgx-static")
+
+## Dyamic icons from code
+GET     /css/icons.css						Pages.IconsCss
+
+
+## Pages -----------------------
+GET     /									Pages.Index
+GET     /json-api							Pages.JsonApi
+GET     /kml-api							Pages.KmlApi
+GET     /xml-api							Pages.XmlApi
+GET     /other-api							Pages.OtherApi
+GET     /widget     						Pages.Widget
+GET     /sources     						Pages.Sources
+
+## Navdata -----------------------
+
+## all search - mainly for map
+GET     /json/all      						NavDb.SearchAllJson
+GET     /json/navaids      					NavAid.SearchJson
+
+
+## airports
+GET     /json/airports/all      			Airport.AllJson
+GET     /json/airports      	    		Airport.SearchJson
+
+
+## airport
+#GET    /airport/:ident.:ext      			Airport.AirportHandler
+GET		/airport/:ident.html      			Airport.Airport
+GET		/json/airport/:ident				Airport.AirportJson
+GET     /xml/airport/:ident      			Airport.AirportXml
+
+## db
+GET     /json/dev/db/info      					ControlPanel.DB_InfoJson
+GET     /json/dev/db/tables   					ControlPanel.DB_TablesJson
+GET     /json/dev/db/table/:table      			ControlPanel.DB_TableJson
+GET     /json/dev/db/views     					ControlPanel.DB_ViewsJson
+#GET     /json/dev/db/view/:table/update      	ControlPanel.DB_ViewUpdateJson
+GET     /json/dev/db/view/:table      			ControlPanel.DB_ViewJson
+
+#GET     /json/import/fix_dat      			ControlPanel.ImportFixDatJson
+
+
+
+
+## Control panel
+GET     /controlpanel      					ControlPanel.Index
+
+# DEV
+GET     /json/dev/routes      	    		ControlPanel.RoutesJson
+
+
+## backwards fgmap
+GET		/xml/fg_nav_xml.cgi					NavDb.FGMapNavXml
+GET		/xml/fgmap-nav.xml					NavDb.FGMapNavXml
+
+
+
+
+# Catch all ------------------------
+#*       /:controller/:action                    :controller.:action
+
+# soon WS 		/ws/feed							WebSocket.WS_Handler
+
