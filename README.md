@@ -15,10 +15,10 @@ and regular updated "feed" fo FlightGear pilots
 
 - it takes the latest xplane data, which is a huge tarball.zip
 - and imports using python and the navimport/* hacks
--- into a postgis database
--- the postgis db is setup with views and
--- extract spatial data from the geometry machine
--- and convert to values eg lat/lon on the fly
+ -- into a postgis database
+ -- the postgis db is setup with views and
+ -- extract spatial data from the geometry machine
+ -- and convert to values eg lat/lon on the fly
 - The golang application replies to queries for this data in various formats
 -- at http://navdb.freeflightsim.org/
 -- and soon websocket, kml and xml feed
